@@ -26,9 +26,7 @@ while game_is_on:
     time.sleep(0.1)
     snake.move()
 
-     ###################
-    #collision with food#
-     ###################
+    # collision with food#
 
     if snake.head.distance(food) < 15:  # snake.segment[0].distance(food)#
         food.set_new_loc()
@@ -36,26 +34,18 @@ while game_is_on:
         scoreboard.hit()
         snake.extend()
 
-     ######################
     # collision with walls #
-     ######################
 
-    if (snake.head.xcor()>290 or snake.head.xcor()<-290
-            or snake.head.xcor()>290 or snake.head.xcor()<-290):
-        game_is_on=False
-        scoreboard.update()
-        scoreboard.game_over()
+    if (snake.head.xcor() > 290 or snake.head.xcor() < -290
+            or snake.head.ycor() > 290 or snake.head.ycor() < -290):
+        scoreboard.reset_sb()
+        snake.snake_reset()
 
-     #########################
     # collision with own tail #
-     #########################
 
     for segment in snake.segments[1:]:
-        if snake.head.distance(segment)<10:
-            game_is_on=False
-            scoreboard.update()
-            scoreboard.game_over()
-
-
+        if snake.head.distance(segment) < 10:
+            scoreboard.reset_sb()
+            snake.snake_reset()
 
 screen.exitonclick()

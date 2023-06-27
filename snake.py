@@ -53,3 +53,10 @@ class Snake(Turtle):
     def rightKey(self):
         if self.head.heading() != LEFT:
             self.segments[0].setheading(RIGHT)
+
+    def snake_reset(self):
+        for _ in self.segments:
+            _.goto(1000,1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
